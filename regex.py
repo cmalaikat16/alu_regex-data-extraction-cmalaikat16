@@ -20,6 +20,11 @@ def is_valid_currency(amount):
     pattern = r'^\$\d{1,3}(,\d{3})*(\.\d{2})?$'
     return re.match(pattern, amount) is not None
 
+# HTML tag validation
+def is_valid_html_tag(tag):
+    pattern = r'^<\s*\w+(\s+[\w\-]+(=\s*"(?:[^"]|\\")*")?)?\s*/?>$'
+    return re.match(pattern, tag) is not None
+
 # Example usage
 test_data = {
     "phones": [
@@ -43,6 +48,12 @@ test_data = {
         "$19.99",
         "$1,234.56",
         "$123456.78"
+    ],
+    "html_tags": [
+        "<p>",
+        "<div class='example'>",
+        "<img src='image.jpg' alt='description'>",
+        "<invalid-tag>"
     ]
 }
 
@@ -58,3 +69,7 @@ for hashtag in test_data["hashtags"]:
 
 for currency in test_data["currencies"]:
     print(f"Currency '{currency}' is valid? {is_valid_currency(currency)}")
+
+for tag in test_data["html_tags"]:
+    print(f"HTML tag '{tag}' is valid? {is_valid_html_tag(tag)}")
+    
